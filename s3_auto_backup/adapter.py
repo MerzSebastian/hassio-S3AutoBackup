@@ -4,7 +4,7 @@ import time
 import json
 import os
 
-
+os.system('echo ' + os.environ.get('SUPERVISOR_TOKEN'))
 res = requests.post("http://supervisor/backups/new/full", headers={
     "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN')
 })
