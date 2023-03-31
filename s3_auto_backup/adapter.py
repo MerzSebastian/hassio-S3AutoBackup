@@ -5,7 +5,7 @@ import json
 import os
 
 
-log = lambda x: os.system('echo ' + x)
+log = lambda x: os.system('echo ' + str(x))
 
 res = requests.post("http://supervisor/backups/new/full", headers={
     "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN')
