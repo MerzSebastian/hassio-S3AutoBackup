@@ -8,7 +8,7 @@ import os
 res = requests.post("http://supervisor/backups/new/full", headers={
     "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN')
 })
-raise Exception(res.json())
+raise Exception(res.text)
 
 hass_options = json.load(open('/data/options.json'))
 
