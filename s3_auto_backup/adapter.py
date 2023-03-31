@@ -5,9 +5,9 @@ import json
 import os
 
 
-mqtt_response = requests.post("http://supervisor/backups/new/full", headers={
+requests.post("http://supervisor/backups/new/full", headers={
     "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN')
-}).json()["data"]
+})
 
 hass_options = json.load(open('/data/options.json'))
 
