@@ -1,6 +1,6 @@
 name: S3 Auto Backup
 description: Home Assistant Addon to automatically create backups and uploads them to aws s3
-version: 1.0.12
+version: 1.0.13
 slug: s3_auto_backup
 init: false
 arch:
@@ -12,6 +12,9 @@ arch:
 
 options:
   logging: true
+
+map:
+  - backup:rw
 
 schema:
   public_key: str
