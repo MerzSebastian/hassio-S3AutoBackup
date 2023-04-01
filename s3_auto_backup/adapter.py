@@ -8,10 +8,15 @@ from datetime import datetime
 hass_options = json.load(open('/data/options.json'))
 log = lambda value: os.system(f'echo \'{datetime.now().strftime("%m/%d/%Y, %H:%M:%S")} | {str(value)}\'') if hass_options["logging"] else lambda:None 
 
+
+res = requests.get("http://supervisor/supervisor/ping", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
+log("POST: http://supervisor/supervisor/ping - status code: " + res.status_code)
+log("POST: http://supervisor/supervisor/ping - text: " +res.text)
+
 res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
 
-log(res.status_code)
-log(res.text)
+log("POST: http://supervisor/backups/new/full - status code: " + res.status_code)
+log("POST: http://supervisor/backups/new/full - text: " +res.text)
 
 # log(hass_options)
 
