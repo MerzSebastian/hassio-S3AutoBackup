@@ -5,6 +5,7 @@ import json
 import os
 from datetime import datetime
 
+hass_options = json.load(open('/data/options.json'))
 log = lambda value: os.system(f'echo \'{datetime.now().strftime("%m/%d/%Y, %H:%M:%S")} | {str(value)}\'') if hass_options["logging"] else lambda:None 
 
 res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
@@ -12,7 +13,6 @@ res = requests.post("http://supervisor/backups/new/full", headers={ "Authorizati
 log(res.status_code)
 log(res.text)
 
-# hass_options = json.load(open('/data/options.json'))
 # log(hass_options)
 
 # s3 = boto3.client(
