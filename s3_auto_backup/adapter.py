@@ -10,13 +10,13 @@ log = lambda value: os.system(f'echo \'{datetime.now().strftime("%m/%d/%Y, %H:%M
 
 
 res = requests.get("http://supervisor/supervisor/ping", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
-log("POST: http://supervisor/supervisor/ping - status code: " + res.status_code)
-log("POST: http://supervisor/supervisor/ping - text: " +res.text)
+log(f'POST: http://supervisor/supervisor/ping - status code: { res.status_code }')
+log(f'POST: http://supervisor/supervisor/ping - text: { res.text }')
 
 res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
 
-log("POST: http://supervisor/backups/new/full - status code: " + res.status_code)
-log("POST: http://supervisor/backups/new/full - text: " +res.text)
+log(f'POST: http://supervisor/backups/new/full - status code: { res.status_code }')
+log(f'POST: http://supervisor/backups/new/full - text: { res.text }')
 
 # log(hass_options)
 
