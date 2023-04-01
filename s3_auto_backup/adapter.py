@@ -10,8 +10,8 @@ log = lambda value: os.system(f'echo \'{datetime.now().strftime("%m/%d/%Y, %H:%M
 
 
 res = requests.get("http://supervisor/supervisor/ping", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
-log(f'POST: http://supervisor/supervisor/ping - status code: { res.status_code }')
-log(f'POST: http://supervisor/supervisor/ping - text: { res.text }')
+log(f'GET: http://supervisor/supervisor/ping - status code: { res.status_code }')
+log(f'GET: http://supervisor/supervisor/ping - text: { res.text }')
 
 res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
 
