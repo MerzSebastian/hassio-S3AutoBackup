@@ -3,19 +3,25 @@ import requests
 import time
 import json
 import os
+from datetime import datetime
 
+log = lambda value: os.system(f'echo \'{datetime.now().strftime("%m/%d/%Y, %H:%M:%S")} | {str(value)}\'') if hass_options["logging"] else lambda:None 
 
-log = lambda x: os.system('echo ' + str(x))
+res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
 
-res = requests.post("http://supervisor/backups/new/full", headers={
-    "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN')
-})
 log(res.status_code)
 log(res.text)
 
-hass_options = json.load(open('/data/options.json'))
-log(hass_options)
+# hass_options = json.load(open('/data/options.json'))
+# log(hass_options)
 
-
-s3 = boto3.client('s3')
-s3.upload_file('my_big_local_file.txt', 'some_bucket', 'some_key')
+# s3 = boto3.client(
+#     "s3",
+#     aws_access_key_id=hass_options["public_key"],
+#     aws_secret_access_key=hass_options["secret_key"]
+# )
+# s3.upload_file(
+#     filename='my_file.zip', 
+#     bucket=hass_options["bucket_name"], 
+#     key='some_key'
+# )
