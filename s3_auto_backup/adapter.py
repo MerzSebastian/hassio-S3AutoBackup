@@ -13,8 +13,11 @@ res = requests.get("http://supervisor/supervisor/ping", headers={ "Authorization
 log(f'GET: http://supervisor/supervisor/ping - status code: { res.status_code }')
 log(f'GET: http://supervisor/supervisor/ping - text: { res.text }')
 
-res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
+res = requests.get("http://supervisor/backups", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
+log(f'GET: http://supervisor/backups - status code: { res.status_code }')
+log(f'GET: http://supervisor/backups - text: { res.text }')
 
+res = requests.post("http://supervisor/backups/new/full", headers={ "Authorization": "Bearer " + os.environ.get('SUPERVISOR_TOKEN') })
 log(f'POST: http://supervisor/backups/new/full - status code: { res.status_code }')
 log(f'POST: http://supervisor/backups/new/full - text: { res.text }')
 
