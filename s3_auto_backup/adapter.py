@@ -13,14 +13,19 @@ s3 = boto3.client('s3', aws_access_key_id = hass_options['access_key_id'], aws_s
 
 def create_and_upload_backup():
     log('Creating backup...')
-    res = requests.post('http://supervisor/backups/new/full', json = { password: hass_options['backup_password'] } if 'backup_password' in hass_options.keys() else None, headers = { 'Authorization': 'Bearer ' + os.environ.get('SUPERVISOR_TOKEN') })
+    res = requests.post('http://supervisor/backups/new/full', json = { "password": hass_options['backup_password'] } if 'backup_password' in hass_options.keys() else None, headers = { 'Authorization': 'Bearer ' + os.environ.get('SUPERVISOR_TOKEN') })
     if res.status_code == 200:
         log('Backup created successfully! Start uploading it to S3...')
         try:
-            s3.upload_file(f'/backup/{res.json()["data"]["slug"]}.tar', hass_options['bucket_name'], f'{res.json()["data"]["slug"]}.tar')
+            backup_path = f'/backup/{res.json()["data"]["slug"]}.tar'
+            s3.upload_file(backup_path, hass_options['bucket_name'], f'{res.json()["data"]["slug"]}.tar')
             log('Backup uploaded successfully!')
+            if hass_options['delete_local_backup_after_upload']:
+                log('Deleting local backup...')
+                os.remove(backup_path)
+                log('Local backup deleted successfully!')
         except Exception as e:
-            log('ERROR | Backup upload failed! Exception: ' + str(e))
+            log('ERROR | Backup upload failed!')
             raise Exception(e)
     else:
         log('ERROR | Backup creation failed!')

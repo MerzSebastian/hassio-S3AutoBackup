@@ -16,4 +16,4 @@ RUN chmod a+x /entrypoint.sh
 # Install requirements
 RUN pip3 install -r requirements.txt
 
-CMD [ "/entrypoint.sh" ]
+CMD ["/usr/bin/with-contenv", "exec", "python3", "adapter.py"]
