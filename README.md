@@ -19,7 +19,7 @@ To install this add-on, follow these steps:
 3. Click on Add-ons
 4. Click on Add-on Store
 5. Open the menu on the top right and click on Repositories
-6. Add the following URL to the input field: https://github.com/MerzSebastian/hassio-ModbusMQTTBridge
+6. Add the following URL to the input field: https://github.com/MerzSebastian/hassio-S3AutoBackup
 7. Click on the "Add" button
 8. Find the Modbus MQTT Bridge Addon and click on it
 9. Click on the "Install" button
