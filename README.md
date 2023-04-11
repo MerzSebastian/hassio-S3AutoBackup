@@ -34,7 +34,7 @@ The following settings are required for the add-on to work properly:
 - bucket_name: The name of the S3 bucket to upload the backups to
 - cron: A cron-like expression to schedule the backups (e.g. 0 1 * * * for daily backups at 1am)
 - backup_password: A password to encrypt the backup files (optional, but recommended)
-- delete_local_backup_after_upload: Whether to delete the local backup file after uploading it to S3 (default: true)
+- delete_local_backup_after_upload: Whether to delete the local backup file after uploading it to S3 (default: false)
 
 # Usage
 
